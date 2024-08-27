@@ -3,6 +3,7 @@
 #include<vector>
 #include<iomanip>
 #include <fstream>
+#include<cstdlib>
 
 using namespace std;
 
@@ -55,14 +56,25 @@ double Simpson13(int a, int b, int n){
     return ans;
 }
 
+double Montecarlo(int a,int b, int n){
+	double f=0.0;
+    for (int i = 0; i < n; i++)
+    {
+       double x=a+(double)rand()/RAND_MAX*(b-a);
+       f=f+func(x);
+    }
+    double ans=double(b-a)/n*f;
+	return ans;
+}
 int main(){
 	ofstream outfile("compare.txt");
-    vector<int> iter={10,40,80,100,1000,10000,100000,1000000,10000000};
+    vector<int> iter={10,40,80,100,1000,10000,20000,300000,100000,500000,1000000};
     int a=0;
     int b=10;
 	for (int j = 0; j <iter.size(); j++)
 	{
-		outfile<<setw(8)<<iter[j]<<" "<<Trapezoid(a,b,iter[j])<<" "<<Simpson13(a,b,iter[j])<<endl;
+		outfile<<setw(8)<<setprecision(10)<<iter[j]<<" "<<Trapezoid(a,b,iter[j])<<" "
+		<<Simpson13(a,b,iter[j])<<" "<<Montecarlo(a,b,iter[j])<<endl;
 	}
 	
     return 0;
