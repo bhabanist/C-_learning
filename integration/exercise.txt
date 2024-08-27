@@ -1,0 +1,2 @@
+1.Integrate x^3sin(x)/(e^x-1) from 0 to \infty as we can not take \infty compare the values by taking large numbers
+2.exp(-x^2)/(1+x^2) from 0 to infty
